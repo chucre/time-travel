@@ -1,0 +1,9 @@
+doctype xml
+gpx(xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="OSMTracker for Android™ - https://github.com/nguillaumin/osmtracker-android" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd ")
+  trk
+    name Traking of car {{track[0]}}
+    trkseg
+      each track, index in tracks
+        trkpt(lat=track[1] lon=track[2])
+          time= (new Date(track[3])).toISOString().replace('.000','')
+          name= index
