@@ -1,0 +1,13 @@
+{
+  "name": "time-travel",
+  "version": "0.0.1",
+  "description": "Given a GPS tracker data from call a MapMatching and calculate the time take in each edge.",
+  "repository": "https://github.com/chucre/time-travel",
+  "main": "processFile.js",
+  "author": "Fernando Chucre <fernandochucre@gmail.com>",
+  "license": "GNU GENERAL PUBLIC LICENSE, Version 2",
+  "dependencies": {
+    "geolib": "^2.0.18",
+    "jade": "^1.11.0"
+  }
+}

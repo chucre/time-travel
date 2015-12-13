@@ -1,0 +1,53 @@
+case 1:
+
+
+          Link 1                   Link 2
++---------------------------+------------------------+
+|                           |                        |
+ +-----+---+----+----+----+  +-----+---------+------+
+         |               |     |                  |
+   point 0               |     point x            |
+                    point n(last)                 point z (last)
+
+
+case 2:
+        Link 1                   Link2
++-------------------------+--------------------------+
+|                         |                          |
+ +-----------------------+ +------------------------+
+   |                  |
+   point 0         point n
+
+pseudo code: 
+
+  delta_inicial
+  delta_final
+  t_inicial
+  t_final
+  percurso_percorrido
+  tempo_percorrido_conhecido = t_final-t_inicial
+  tempo_total = tempo_percorrido_conhecido+proporção_percorrida_até a proxima coleta
+
+  achou_ponto_inicial <- false
+  achou_ponto_final <- false
+
+  link <- cada line|multiline do link
+    if !achou_ponto_inicial
+      if ponto_inicial lies link
+        delta_inicial += distance_to(link[0], ponto_inicial)
+        persurso_percorrido += distance_to(link[1], ponto_inicial)
+        achou_ponto_inicial=true
+      else 
+        delta_inicial += distance_to(link[0], link[1])
+      end
+    else if !achou_pont_final
+      if ponto_final lies link
+        persurso_percorrido += distance_to(link[0], ponto_final)
+        delta_final += distance_to(link[1], ponto_final)
+      else
+        persurso_percorrido += distance_to(link[0], link[1])
+      end
+    else
+      delta_final += distance_to(link[0], link[1])
+    end
+
