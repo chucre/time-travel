@@ -7,8 +7,10 @@ trackingParser("./samples/points.txt", function(traking){
     timeTravelCalculate(route, traking, function(route){
       route.links.map(function(e){
         delete e.wpts;
+        var geometry = JSON.parse(e.geometry)
+        // console.log(JSON.stringify(e));
+        console.log(e.id+';'+JSON.stringify(geometry.coordinates)+';'+e.total_time+';'+e.totalLength+';'+e.entry_time);
       })
-      console.log(JSON.stringify(route));
     });
   })
 })
