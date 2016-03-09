@@ -1,3 +1,29 @@
+To run project you will need install map-matching from https://github.com/chucre/map-matching.
+
+$ git clone https://github.com/chucre/map-matching
+
+Then you will need download a OpenStreet Map database (I use brazil database):
+
+$ cd map-matching
+$ wget download.geofabrik.de/south-america/brazil-latest.osm.pbf
+
+Once you have the databse downloaded, you will need import it into graphhopper internal database
+
+$ ./map-matching.sh action=import datasource=./brazil-latest.osm.pbf vehicle=car
+
+Now you will start the map-matching server:
+
+./map-matching.sh action=start-server
+
+Now you will need open a new terminal and unzip sample file and run project:
+
+$ npm install
+$ gunzip sample/points.txt.gz
+$ node processFile.js
+
+
+These project is based on Chucre time travel algorithm that fallows:
+
 case 1:
 
 
@@ -18,7 +44,7 @@ case 2:
    |                  |
    point 0         point n
 
-pseudo code: 
+pseudo code:
 
   delta_inicial
   delta_final
@@ -37,7 +63,7 @@ pseudo code:
         delta_inicial += distance_to(link[0], ponto_inicial)
         persurso_percorrido += distance_to(link[1], ponto_inicial)
         achou_ponto_inicial=true
-      else 
+      else
         delta_inicial += distance_to(link[0], link[1])
       end
     else if !achou_pont_final
@@ -50,4 +76,3 @@ pseudo code:
     else
       delta_final += distance_to(link[0], link[1])
     end
-
