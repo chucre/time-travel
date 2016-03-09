@@ -5,7 +5,12 @@ var trackingParser = require('./tracking-parser'),
 trackingParser("/Users/fernandochucre/tmp/points_2015-11-19.10-01-01.traking.txt", function(traking){
   mapMatching(traking, function(route, traking){
     timeTravelCalculate(route, traking, function(route){
-      console.log(JSON.stringigy(route));
+      route.links.map(function(e){
+        delete e.wpts;
+      })
+      console.log(JSON.stringify(route));
     });
   })
 })
+
+//trackingParser -> mapMatching -> timeTravelCalculate -> write in database
