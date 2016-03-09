@@ -7,7 +7,7 @@
   "author": "Fernando Chucre <fernandochucre@gmail.com>",
   "license": "GNU GENERAL PUBLIC LICENSE, Version 2",
   "dependencies": {
-    "geolib": "^2.0.18",
+    "geolib": "chucre/geolib",
     "jade": "^1.11.0"
   }
 }
