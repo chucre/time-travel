@@ -13,7 +13,7 @@ function parseResponse(data, tracking, cb) {
   var result = JSON.parse(data);
   for( var i=0;i<result.diary.entries.length;i++){
     entry = result.diary.entries[i];
-    cb.call(this, entry.route, tracking);   
+    cb.call(this, entry, tracking);
   }
 }
 module.exports = function(tracking, cb) {
@@ -21,11 +21,12 @@ module.exports = function(tracking, cb) {
   fs.stat(cache_file_name, function(err, stats){
     if (err) {
       var gpxContent = view({tracks: tracking});
-      var options = { 
+      var options = {
         method: 'POST',
-        host: 'localhost:8989',
+        host: 'localhost',
+        port: '8989',
         path: '/match?vehicle=car&max_nodes_to_visit=1000&force_repair=true&type=extended_json',
-        headers: { 'Content-Type':'application/xml' } 
+        headers: { 'Content-Type':'application/xml' }
       };
       var request = http.request(options, function(res) {
         res.setEncoding('utf8');
@@ -47,7 +48,9 @@ module.exports = function(tracking, cb) {
           console.log("Got error on hit test.roadmatching.com: " + e.message);
         })
       });
-
+      request.on('error', function(e){
+        console.log("Got error on hit test.roadmatching.com: " + e.message);
+      })
       request.write( gpxContent );
       request.end();
     } else {
@@ -61,5 +64,5 @@ module.exports = function(tracking, cb) {
       })
     }
   })
-  
+
 }
