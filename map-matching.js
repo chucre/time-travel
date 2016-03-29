@@ -11,6 +11,9 @@ view = jade.compileFile('tracking.jade', {});
 
 function parseResponse(data, tracking, cb) {
   var result = JSON.parse(data);
+  if (result.diary==undefined) {
+    return;
+  }
   for( var i=0;i<result.diary.entries.length;i++){
     entry = result.diary.entries[i];
     cb.call(this, entry, tracking);
