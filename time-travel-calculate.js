@@ -7,11 +7,16 @@ function adjustLink(link, value) {
 }
 
 module.exports = function(route, traking, cb) {
+  var first_valid_link;
   for(var i in route.links) {
     var link = route.links[i];
     if (link.wpts==undefined || link.wpts.length==0) {
       continue;
     }
+    if (!first_valid_link) {
+      first_valid_link=i;
+    }
+
     var first_point = link.wpts[0];
     var last_point = link.wpts[link.wpts.length-1];
 
@@ -55,7 +60,7 @@ module.exports = function(route, traking, cb) {
     link.entry_time = first_point.timestamp;
     link.total_time = last_point.timestamp-first_point.timestamp;
 
-    if (i>0) {
+    if (i>first_valid_link) {
       var j = i;
 
       var links_to_distribute = [[link, link.start_delta]];
@@ -77,7 +82,6 @@ module.exports = function(route, traking, cb) {
         links_to_distribute.push([previous_link, previous_delta]);
 
       } while(previous_link.end_delta==undefined);
-
 
       var last_time = previous_link.wpts[previous_link.wpts.length-1].timestamp;
       var total_time = link.wpts[0].timestamp-last_time;
