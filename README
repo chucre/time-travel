@@ -27,13 +27,13 @@ These project is based on Chucre time travel algorithm that fallows:
 case 1:
 
 
-          Link 1                   Link 2
-+---------------------------+------------------------+
-|                           |                        |
- +-----+---+----+----+----+  +-----+---------+------+
-         |               |     |                  |
-   point 0               |     point x            |
-                    point n(last)                 point z (last)
+          Link 1                   Link 2                Link 3
++---------------------------+------------------------+-------------------------+
+|                           |                        |                         |
+ +-----+---+----+----+----+  +-----+---------+------+ +-----------------------+
+         |               |                              |                  |
+   point 0               |                              point x            |
+                    point n(last)                                 point z (last)
 
 
 case 2:
