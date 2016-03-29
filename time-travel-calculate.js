@@ -1,7 +1,7 @@
 var geolib = require('geolib');
 
 function adjustLink(link, value) {
-  var speed = link.totalLength/(link.total_time/1000);
+  var speed = link.totalLength/link.total_time;
   link.total_time += value/speed;
   link.totalLength += value;
 }
@@ -85,13 +85,23 @@ module.exports = function(route, traking, cb) {
 
       var last_time = previous_link.wpts[previous_link.wpts.length-1].timestamp;
       var total_time = link.wpts[0].timestamp-last_time;
+      var time_left = total_time;
 
-      var speed = total_length/(total_time/1000);
+      var speed = total_length/total_time;
 
       for(var j in links_to_distribute) {
-        var link_aux = links_to_distribute[j][0];
-        link_aux.total_time += links_to_distribute[j][1]/speed;
+        var link_aux = links_to_distribute[j][0]
+          , time_to_add = links_to_distribute[j][1]/speed
+          ;
+
+        link_aux.total_time += time_to_add;
+        time_left -= time_to_add;
+
         link_aux.totalLength += links_to_distribute[j][1];
+        var next_id = parseInt(j)+1;
+        if (links_to_distribute[next_id] && links_to_distribute[next_id][0].entry_time==undefined) {
+          links_to_distribute[next_id][0].entry_time = last_time-time_left;
+        }
       }
     }
   }
